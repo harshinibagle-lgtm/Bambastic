@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bambastic – Bamboo Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2f855a;      /* deep green */
+      --accent: #f6ad55;       /* warm accent */
+      --bg: #f7faf7;           /* light background */
+      --text: #1a202c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Layout */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,250,247,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 8px 18px rgba(47,133,90,0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(47,133,90,0.32);
+    }
+    .btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: #e6fffa;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 2.2rem;
+      align-items: center;
+      padding: 2rem 0 2.5rem;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: #e6fffa;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      margin-bottom: 0.7rem;
+    }
+    .hero h1 span {
+      color: var(--primary);
+    }
+    .hero p {
+      font-size: 0.98rem;
+      max-width: 460px;
+      margin-bottom: 1.3rem;
+      color: #4a5568;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .hero-note {
+      font-size: 0.8rem;
+      color: #718096;
+    }
+
+    .hero-card {
+      position: relative;
+      background: white;
+      border-radius: 22px;
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 12px 30px rgba(15, 94, 52, 0.15);
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(47,133,90,0.28), transparent 60%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .hero-card-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .hero-pill {
+      font-size: 0.75rem;
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.65);
+      color: #fefcbf;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .mini-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 14px;
+      padding: 0.65rem 0.7rem;
+      border: 1px solid rgba(226,232,240,0.9);
+      font-size: 0.8rem;
+    }
+    .mini-card strong {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4a5568;
+      margin-bottom: 0.2rem;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 0.9rem;
+      right: 1rem;
+      background: #f0fff4;
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.75rem;
+      border: 1px dashed rgba(47,133,90,0.7);
+    }
+
+    /* Sections */
+    section {
+      padding: 1.75rem 0 0.75rem;
+    }
+    section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-bottom: 1rem;
+      max-width: 620px;
+    }
+
+    /* Products */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      padding: 0.9rem 0.9rem 1rem;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .product-tag {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #718096;
+    }
+    .product-name {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+    .product-meta {
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+    .price {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: #edf2f7;
+      color: #4a5568;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .bullet-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+    .bullet-list li {
+      margin-bottom: 0.4rem;
+      display: flex;
+      gap: 0.4rem;
+    }
+    .bullet-dot {
+      margin-top: 0.35rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Contact */
+    .contact-box {
+      background: #e6fffa;
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      border: 1px solid #b2f5ea;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4a5568;
+    }
+    .contact-value {
+      font-weight: 500;
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem 1.8rem;
+      font-size: 0.78rem;
+      color: #a0aec0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="nav">
+      <a href="#top" class="logo">
+        <span class="logo-icon">🎋</span>
+        <span>Bambastic</span>
+      </a>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#about">Our Story</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="https://wa.me/917718969720" class="btn btn-outline">WhatsApp Us</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-tag">
+          <span>Plastic-free living</span>
+        </div>
+        <h1>Think <span>Bamboo</span>, not Plastic.</h1>
+        <p>
+          Bambastic brings thoughtfully designed bamboo essentials from India – toothbrushes, bottles,
+          straws and gifting kits that are gentle on the planet and your daily routine.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">Shop Bamboo Essentials</a>
+          <a href="#contact" class="btn btn-outline">Bulk / Corporate Orders</a>
+        </div>
+        <p class="hero-note">
+          Free delivery in Mumbai on orders above ₹999. Pan‑India shipping available.
+        </p>
+      </div>
+
+      <aside class="hero-card" aria-label="Bamboo benefits">
+        <div class="hero-card-header">
+          <div class="hero-card-title">Why Bamboo?</div>
+          <div class="hero-pill">3× faster than trees</div>
+        </div>
+        <div class="hero-grid">
+          <div class="mini-card">
+            <strong>Low footprint</strong>
+            Grows quickly with minimal water and no pesticides, making it one of the most renewable materials.
+          </div>
+          <div class="mini-card">
+            <strong>Plastic-free swaps</strong>
+            Replace daily plastic items like brushes, bottles and straws without changing your routine.
+          </div>
+          <div class="mini-card">
+            <strong>Made in India</strong>
+            Crafted with local partners and artisan units, supporting sustainable livelihoods.
+          </div>
+          <div class="mini-card">
+            <strong>Biodegradable</strong>
+            At end‑of‑life, bamboo returns to the earth instead of ending up in oceans and landfills.
+          </div>
+        </div>
+        <div class="hero-badge">
+          Every order replaces up to 10+ single‑use plastics.
+        </div>
+      </aside>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <h2>Bamboo Essentials</h2>
+      <p class="section-subtitle">
+        Start with simple, high‑impact swaps that fit into your current lifestyle. Add or rename products
+        as your catalog grows.
+      </p>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-tag">Daily care</div>
+          <div class="product-name">Bamboo Toothbrush (Soft)</div>
+          <p class="product-meta">
+            Charcoal‑infused soft bristles, ergonomic handle, plastic‑free packaging. Ideal for all age groups.
+          </p>
+          <div class="product-bottom">
+            <span class="price">₹69</span>
+            <span class="pill">Set of 4 available</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">On-the-go</div>
+          <div class="product-name">Comb</div>
+          <p class="product-meta">
+            Bamboo combs detangle hair without static, boost scalp health, and replace plastic sustainably.
+          </p>
+          <div class="product-bottom">
+            <span class="price">₹89</span>
+            <span class="pill">Custom logo option</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">Stationary</div>
+          <div class="product-name">Penstand</div>
+          <p class="product-meta">
+            Bamboo penstands offer sustainable, antibacterial desk organization with natural elegance.
+          </p>
+          <div class="product-bottom">
+            <span class="price">₹149</span>
+            <span class="pill">Bulk packs for events</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">Hair Care</div>
+          <div class="product-name">Hairclip</div>
+          <p class="product-meta">
+            Bamboo hair clutches provide a durable, lightweight, and antibacterial grip for all-day comfort without plastic waste.
+          </p>
+          <div class="product-bottom">
+            <span class="price">₹49</span>
+            <span class="pill">Custom Gifting</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>Our Story</h2>
+      <p class="section-subtitle">
+        Bambastic started in Mumbai with a simple idea – make sustainable choices feel modern, affordable
+        and easy for everyday Indians.
+      </p>
+
+      <div class="about-grid">
+        <div>
+          <ul class="bullet-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Mission:</strong> help homes and businesses switch 1 plastic product at a time with high‑quality bamboo alternatives.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Sourcing:</strong> responsibly sourced bamboo and small‑batch manufacturing to ensure durability and finish.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Partners:</strong> open to working with hotels, cafés, corporates and event agencies for sustainable gifting.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span><strong>Future:</strong> expanding into bamboo organizers, stationery and workspace accessories.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mini-card">
+          <strong>Impact snapshot</strong>
+          <p style="margin: 0.3rem 0 0.4rem;">
+            Track and update these numbers as your brand grows.
+          </p>
+          <ul class="bullet-list">
+            <li>
+              <span class="bullet-dot"></span>
+              <span>500+ bamboo toothbrushes distributed.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>50+ eco gift hampers for corporates and events.</span>
+            </li>
+            <li>
+              <span class="bullet-dot"></span>
+              <span>Estimated 25,000+ single‑use plastics avoided.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact & Orders</h2>
+      <p class="section-subtitle">
+        For retail orders, bulk enquiries, custom branding or collaborations, reach out on WhatsApp or email.
+      </p>
+
+      <div class="contact-box">
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value">+91‑77189 69720</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">hello@bambastic.in</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Instagram</span>
+          <span class="contact-value">@bambastic.in</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Mumbai, Maharashtra</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2025 Bambastic. All rights reserved.</span>
+    <span>Designed & built by Harshini.</span>
+  </footer>
+</body>
+</html>
